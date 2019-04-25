@@ -14,7 +14,8 @@ function HDWalletProvider (privateKeys, providerUrl) {
   var type = typeof privateKeys;
 
   const addW = (key) => {
-    var wallet = ethereumjsWallet.fromPrivateKey(Buffer.from(key, "hex"));
+    key = key || '';
+    var wallet = ethereumjsWallet.fromPrivateKey(Buffer.from(key.replace(/0x/g, ''), "hex"));
     var addr = '0x' + wallet.getAddress().toString('hex');
     that.addresses.push(addr);
     that.wallets[addr] = wallet;
