@@ -63,8 +63,8 @@ function HDWalletProvider (privateKeys, providerUrl) {
     })
   )
   this.engine.addProvider(new FiltersSubprovider());
-  
-  if (providerUrl.toLowerCase().startWith("wss")) {
+  providerUrl = providerUrl.toLowerCase();
+  if (providerUrl.startWith("wss://") || providerUrl.startWith("ws://")) {
     this.engine.addProvider(new ProviderSubprovider(new Web3.providers.WebsocketProvider(providerUrl)));  
   }
   else{
