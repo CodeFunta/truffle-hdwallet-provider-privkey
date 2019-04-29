@@ -7,6 +7,12 @@ const ProviderEngine = require('web3-provider-engine')
 const ProviderSubprovider = require("web3-provider-engine/subproviders/provider.js");
 const ethereumjsWallet = require('ethereumjs-wallet')
 
+if(!String.prototype.startsWith){
+  String.prototype.startsWith = function (str) {
+      return !this.indexOf(str);
+  }
+}
+
 function HDWalletProvider (privateKeys, providerUrl) {
   const that = this;
   this.wallets = {};
