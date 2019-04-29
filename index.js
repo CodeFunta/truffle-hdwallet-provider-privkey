@@ -63,7 +63,14 @@ function HDWalletProvider (privateKeys, providerUrl) {
     })
   )
   this.engine.addProvider(new FiltersSubprovider());
-  this.engine.addProvider(new ProviderSubprovider(new Web3.providers.HttpProvider(providerUrl)));
+  
+  if (providerUrl.toLowerCase().startWith("wss")) {
+    this.engine.addProvider(new ProviderSubprovider(new Web3.providers.WebsocketProvider(providerUrl)));  
+  }
+  else{
+    this.engine.addProvider(new ProviderSubprovider(new Web3.providers.HttpProvider(providerUrl)));
+  }
+  
   this.engine.start(); // Required by the provider engine.
 }
 
